@@ -7,7 +7,7 @@ description: 本篇文章将列举水平居中、垂直居中、水平垂直居�
 ---
 ## 1 水平居中
 ### 1.1 行内或类行内元素（比如图片、文本、链接等）
-块级父容器设置text-align:center;
+块级父容器设置text-align: center;
 ### 1.2 块级元素
 #### 1.2.1 固定宽度(注：in代表子元素，out代表父元素)
 1. in----margin-left:(out.width-in.width)/2;
