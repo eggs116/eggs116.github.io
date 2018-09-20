@@ -122,7 +122,7 @@ about:
 links:
   - title: 石头的前端博客
     url: http://heyheystone.com/
-  - title: site-name2
-    url: http://www.example2.com/
-  - title: site-name3
-    url: http://www.example3.com/
+  # - title: site-name2
+  #   url: http://www.example2.com/
+  # - title: site-name3
+  #   url: http://www.example3.com/
