@@ -81,7 +81,7 @@ stylus: compress:true
 deploy:
   type: git
   # repository: https://github.com/eggs116/eggs116.github.io.git
-  repository: https://github.com/eggs116/eggs116.github.io.git
+  repository: git@github.com:eggs116/eggs116.github.io.git
   branch: master
 
 #jsonContent
