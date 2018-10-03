@@ -2,7 +2,10 @@
 title: 页面布局--居中问题
 date: 2018-08-16 11:22:40
 categories: 页面布局
-tags: 页面布局 html css
+tags: 
+    - 页面布局 
+    - html 
+    - css
 description: 本篇文章将列举水平居中、垂直居中、水平垂直居中的各种方法
 ---
 ## 1 水平居中

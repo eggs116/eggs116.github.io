@@ -5,15 +5,16 @@
 # Site
 title: 二蛋
 subtitle: 前端博客
-description: eggs's blog
+description: 二蛋的前端博客
 keywords: js css html
-author:  eggs
-language: zh-CN
+author:  二蛋
+avatar: /images/avatar.png
+language: zh-Hans
 timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: http://yyeggs.com
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -73,7 +74,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: hexo-theme-BlueLake
+theme: next
 stylus: compress:true
 
 # Deployment
@@ -103,3 +104,8 @@ jsonContent:
     excerpt: false
     categories: false
     tags: true
+# add post views
+leancloud_visitors:
+  enable: true
+  app_id: O3XbBuA1LMIRoIh3QlskFszs-gzGzoHsz
+  app_key: YhjStMUgGNgH1eXaWbJhysD5
