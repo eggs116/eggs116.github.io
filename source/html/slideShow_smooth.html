@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>平滑无缝滚动_无arr_无circle</title>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul,
+        ol {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .wrap {
+            width: 600px;
+            height: 260px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            margin: 100px auto;
+            position: relative;
+        }
+        .slide {
+            width: 600px;
+            height: 260px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        ul {
+            width: 3600px;
+            position: absolute;
+            left: 0;
+        }
+
+        ul li {
+            float: left;
+        }
+
+        img {
+            width: 400px;
+            height: 260px;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap" id="wrap">
+        <div class="slide" id="slide">
+            <ul>
+                <li><img src="img/1.jpg" alt=""></li>
+                <li><img src="img/2.jpg" alt=""></li>
+                <li><img src="img/3.jpg" alt=""></li>
+                <li><img src="img/4.jpg" alt=""></li>
+                <li><img src="img/5.jpg" alt=""></li>
+                <li><img src="img/6.jpg" alt=""></li>
+                <li><img src="img/7.jpg" alt=""></li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+    var wrap = document.getElementById('wrap');
+    var ul = wrap.getElementsByTagName('ul')[0];
+    var lis = ul.children;
+    var w_lefter=lis[0].offsetWidth;
+    var lis_len = lis.length;//7
+    var lefter = 0; //ul的left值
+    ul.append(lis[0].cloneNode(true), lis[1].cloneNode(true)); //复制第1/2张图片并追加到最后,此时lis.length为9,而lis_len仍为7
+    ul.timer = setInterval(nextAnimate, 6);
+    function nextAnimate() { //动画函数
+        lefter--;
+        lefter < -lis_len*w_lefter ?lefter = 0 : lefter;
+        ul.style.left = lefter + "px";
+    }
+    wrap.addEventListener('mouseover', function () {
+        clearInterval(ul.timer);
+    })
+    wrap.addEventListener('mouseout', function () {
+        ul.timer = setInterval(nextAnimate, 6);
+    })
+</script>
