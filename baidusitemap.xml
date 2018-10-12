@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://yyeggs.com/layout_center/</loc>
-    <lastmod>2018-10-09T08:00:25.589Z</lastmod>
+    <loc>http://yyeggs.com/Center_Horizontal_Vertical/</loc>
+    <lastmod>2018-10-12T09:12:52.478Z</lastmod>
   </url>  <url>
-    <loc>http://yyeggs.com/Multi-Column_Layout_lr/</loc>
-    <lastmod>2018-10-09T07:27:12.446Z</lastmod>
+    <loc>http://yyeggs.com/Center_Vertical/</loc>
+    <lastmod>2018-10-12T09:09:38.864Z</lastmod>
+  </url>  <url>
+    <loc>http://yyeggs.com/Center_Horizontal/</loc>
+    <lastmod>2018-10-12T09:09:23.129Z</lastmod>
+  </url>  <url>
+    <loc>http://yyeggs.com/Multi_Column_Layout_lr/</loc>
+    <lastmod>2018-10-11T01:52:59.064Z</lastmod>
+  </url>  <url>
+    <loc>http://yyeggs.com/Multi_Column_Layout_tb/</loc>
+    <lastmod>2018-10-10T09:06:08.662Z</lastmod>
   </url>
 </urlset>
