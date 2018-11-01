@@ -94,7 +94,7 @@
 
 
 
-  <meta name="keywords" content="html,css,border," />
+  <meta name="keywords" content="css,border," />
 
 
 
@@ -105,18 +105,18 @@
 
 
 
-<meta name="description" content="纯CSS画各种基本图形（）">
-<meta name="keywords" content="html,css,border">
+<meta name="description" content="本篇详解CSS中border的各种属性，以及当属性值个数不同时代表的含义，另外还介绍了box-shadow属性">
+<meta name="keywords" content="css,border">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CSS利用border画各种基本图形">
-<meta property="og:url" content="http://yyeggs.com/CSS_Drawing_Basic_Shapes/index.html">
+<meta property="og:title" content="CSS之border详解">
+<meta property="og:url" content="http://yyeggs.com/CSS_border/index.html">
 <meta property="og:site_name" content="二蛋">
-<meta property="og:description" content="纯CSS画各种基本图形（）">
+<meta property="og:description" content="本篇详解CSS中border的各种属性，以及当属性值个数不同时代表的含义，另外还介绍了box-shadow属性">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-10-15T09:23:20.568Z">
+<meta property="og:updated_time" content="2018-10-30T07:47:41.670Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CSS利用border画各种基本图形">
-<meta name="twitter:description" content="纯CSS画各种基本图形（）">
+<meta name="twitter:title" content="CSS之border详解">
+<meta name="twitter:description" content="本篇详解CSS中border的各种属性，以及当属性值个数不同时代表的含义，另外还介绍了box-shadow属性">
 
 
 
@@ -146,13 +146,13 @@
 
 
 
-  <link rel="canonical" href="http://yyeggs.com/CSS_Drawing_Basic_Shapes/"/>
+  <link rel="canonical" href="http://yyeggs.com/CSS_border/"/>
 
 
 
 
 
-  <title>CSS利用border画各种基本图形 | 二蛋</title>
+  <title>CSS之border详解 | 二蛋</title>
   
 
 
@@ -290,7 +290,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yyeggs.com/CSS_Drawing_Basic_Shapes/">
+    <link itemprop="mainEntityOfPage" href="http://yyeggs.com/CSS_border/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="二蛋">
@@ -307,7 +307,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">CSS利用border画各种基本图形</h2>
+          <h2 class="post-title" itemprop="name headline">CSS之border详解</h2>
         
 
         <div class="post-meta">
@@ -335,8 +335,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-10-15T17:23:20+08:00">
-                2018-10-15
+              <time title="更新于" itemprop="dateModified" datetime="2018-10-30T15:47:41+08:00">
+                2018-10-30
               </time>
             
           </span>
@@ -372,8 +372,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/CSS_Drawing_Basic_Shapes/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/CSS_Drawing_Basic_Shapes/" itemprop="commentCount"></span>
+                <a href="/CSS_border/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/CSS_border/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -381,7 +381,7 @@
 
           
           
-             <span id="/CSS_Drawing_Basic_Shapes/" class="leancloud_visitors" data-flag-title="CSS利用border画各种基本图形">
+             <span id="/CSS_border/" class="leancloud_visitors" data-flag-title="CSS之border详解">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -406,7 +406,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  0 字
+                  1.3k 字
                 </span>
               
 
@@ -422,7 +422,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1 分钟
+                  5 分钟
                 </span>
               
             </div>
@@ -430,7 +430,7 @@
 
           
               <div class="post-description">
-                  纯CSS画各种基本图形（）
+                  本篇详解CSS中border的各种属性，以及当属性值个数不同时代表的含义，另外还介绍了box-shadow属性
               </div>
           
 
@@ -447,7 +447,14 @@
       
 
       
-        <p>##</p>
+        <p>border是用来规定元素边框的样式，有三种默认属性：border-width(边框宽度)、border-style(边框样式)、border-color(边框颜色)，这三种属性都可以分开来写，同时CSS3还新加入了border-radius(圆角度)和border-image(边框背景图)，下面我们就分别来了解一下各个样式属性的取值和说明等</p>
+<h2 id="border-width-边框宽度"><a href="#border-width-边框宽度" class="headerlink" title="border-width 边框宽度"></a>border-width 边框宽度</h2><p>border-width分四个属性：border-top-widht、border-right-width、border-bottom-width、border-left-width<br>取值：<br>    <code>&lt;length&gt;</code>:用长度值来定义边框的厚度，非负值<br>     medium:定义默认厚度的边框，值为3px<br>     thin:定义比默认厚度细的边框，值为1px<br>     thick:定义比默认厚度粗的边框，值为5px<br>说明：<br>4个值：按上、右、下、左的顺序分别作用于四个边<br>3个值：第一个值作用于上，第二个值作用于左右，第三个值作用于下<br>2个值：第一个作用于上下，第二个值作用于左右<br>1个值：同时作用于四个边</p>
+<h2 id="border-style-边框样式"><a href="#border-style-边框样式" class="headerlink" title="border-style 边框样式"></a>border-style 边框样式</h2><p>border-style分四个属性：border-top-style、border-right-style、border-bottom-style、border-left-style<br>取值：<br>    none:无轮廓,该值情况下border-color将不起作用，border-width取值为0，除非边框轮廓为图像，即border-image<br>    hidden:隐藏边框,IE7及以下不支持<br>    dotted:点状轮廓，IE6下显示为dashed效果<br>    dashed:虚线轮廓<br>    solid:实线轮廓<br>    double:双线轮廓，两条单线与其间隔之和等于指定的border-width的值<br>    groove:3D凹槽轮廓<br>    ridge:3D凸槽轮廓<br>    inset:3D凹边轮廓<br>    outset:3D凸边轮廓<br>说明：<br>4个值：按上、右、下、左的顺序分别作用于四个边<br>3个值：第一个值作用于上，第二个值作用于左右，第三个值作用于下<br>2个值：第一个作用于上下，第二个值作用于左右<br>1个值：同时作用于四个边</p>
+<h2 id="border-color-边框颜色"><a href="#border-color-边框颜色" class="headerlink" title="border-color 边框颜色"></a>border-color 边框颜色</h2><p>border-color也跟前上面两个一样分上、右、下、左四个属性<br>取值：<br>    <code>&lt;color&gt;</code>:指定颜色（transparent:透明）<br>说明：<br>4个值：按上、右、下、左的顺序分别作用于四个边<br>3个值：第一个值作用于上，第二个值作用于左右，第三个值作用于下<br>2个值：第一个作用于上下，第二个值作用于左右<br>1个值：同时作用于四个边</p>
+<h2 id="border-radius-圆角度"><a href="#border-radius-圆角度" class="headerlink" title="border-radius 圆角度"></a>border-radius 圆角度</h2><p>border-radius分四个属性：border-top-left-radius(左上角))、border-top-right-radius(右上角)、border-bottom-right-radius(右下角)、border-bottom-left-radius(左下角)<br>取值：<br><code>&lt;length&gt;</code>:用长度设置对象的圆角半径长度，非负数<br><code>&lt;percentage&gt;</code>:用百分比设置对象的圆角半径长度<br>说明：<br>设置或检索对象使用圆角边框。提供2个参数，2个参数以“/”分隔，每个参数允许设置1~4个参数值，第1个参数表示水平半径，第2个参数表示垂直半径，若第2个参数省略，则默认等于第1个参数<br>水平半径：<br>4个值：按top-left(左上角)、top-right(右上角)、bottom-right(右下角)、bottom-left(左下角)顺序分别作用于四个角<br>3个值：第一个值作用于top-left(左上角)，第二个值作用于top-right(右上角)和bottom-left(左下角)，第三个值作用于bottom-right(右下角)<br>2个值：第一个值作用于top-left(左上角)和bottom-right(右下角)，第二个值作用于top-right(右上角)和bottom-left(左下角)<br>1个值：同时作用于全部4个角<br>注：如果想让2个值的时候表示相邻的两个角而不是对角，可以这样写：<code>border-radius:&lt;length&gt;/&lt;length&gt;</code>，其中第一个值表示左上角和右上角，第二个值表示右下角和左下角<br>垂直半径同上</p>
+<h2 id="border-image-边框背景图"><a href="#border-image-边框背景图" class="headerlink" title="border-image 边框背景图"></a>border-image 边框背景图</h2><p>border-image分五个属性：border-image-source、border-image-slice、border-image-width、border-image-outset、border-image-repeat<br>取值：<br>border-image-source：设置或检索对象的边框是否用图像定义样式或图像来源路径<br>border-image-slice：设置或检索对象的边框背景图的分割方式<br>border-image-width：设置或检索对象的边框厚度<br>border-image-outset：设置或检索对象的边框背景图的扩展<br>border-image-repeat：设置或检索对象的边框图像的平铺方式<br>说明：<br>当此属性不生效或图片未加载成功时，border-style就会生效</p>
+<h2 id="box-shadow-边框阴影"><a href="#box-shadow-边框阴影" class="headerlink" title="box-shadow 边框阴影"></a>box-shadow 边框阴影</h2><p>取值：<br>none:无阴影<br><code>&lt;length&gt;</code>：第1个长度值–阴影水平偏移值，方向：右<br><code>&lt;length&gt;</code>：第2个长度值–阴影垂直偏移值，方向：下<br><code>&lt;length&gt;</code>：第3个长度值–阴影模糊值，非负数，可选<br><code>&lt;length&gt;</code>：第4个长度值–阴影外延值，可为负，可选<br><code>&lt;color&gt;</code>：阴影颜色<br><code>inset</code>：阴影类型为内阴影，（当无此值时，默认为外阴影）<br>说明：<br>可以设置多组效果，每组以逗号分隔，应用顺序与上面相同</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本篇主要针对CSS的border属性进行详解，其实我写这篇博客的主要目的是为后面的用border属性写各种对话气泡和各种图形做铺垫，感兴趣的话可以多多关注哦！</p>
 
       
     </div>
@@ -493,8 +500,6 @@
     <footer class="post-footer">
       
         <div class="post-tags">
-          
-            <a href="/tags/html/" rel="tag"># html</a>
           
             <a href="/tags/css/" rel="tag"># css</a>
           
@@ -578,8 +583,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -598,7 +612,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -668,6 +682,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#border-width-边框宽度"><span class="nav-number">1.</span> <span class="nav-text">border-width 边框宽度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#border-style-边框样式"><span class="nav-number">2.</span> <span class="nav-text">border-style 边框样式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#border-color-边框颜色"><span class="nav-number">3.</span> <span class="nav-text">border-color 边框颜色</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#border-radius-圆角度"><span class="nav-number">4.</span> <span class="nav-text">border-radius 圆角度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#border-image-边框背景图"><span class="nav-number">5.</span> <span class="nav-text">border-image 边框背景图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#box-shadow-边框阴影"><span class="nav-number">6.</span> <span class="nav-text">box-shadow 边框阴影</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -696,7 +726,7 @@
     
       <span class="post-meta-item-text">站点总字数&#58;</span>
     
-    <span title="站点总字数">11.2k</span>
+    <span title="站点总字数">16.7k</span>
   
 </div>
 
