@@ -2,7 +2,6 @@
 title: CSS之border详解
 date: 2018-10-15 16:24:57
 tags: 
-    - html
     - css
     - border
 urlname: CSS_border
@@ -65,6 +64,7 @@ border-radius分四个属性：border-top-left-radius(左上角))、border-top-r
 3个值：第一个值作用于top-left(左上角)，第二个值作用于top-right(右上角)和bottom-left(左下角)，第三个值作用于bottom-right(右下角)
 2个值：第一个值作用于top-left(左上角)和bottom-right(右下角)，第二个值作用于top-right(右上角)和bottom-left(左下角)
 1个值：同时作用于全部4个角
+注：如果想让2个值的时候表示相邻的两个角而不是对角，可以这样写：`border-radius:<length>/<length>`，其中第一个值表示左上角和右上角，第二个值表示右下角和左下角
 垂直半径同上
 ## border-image 边框背景图
 border-image分五个属性：border-image-source、border-image-slice、border-image-width、border-image-outset、border-image-repeat
@@ -87,6 +87,8 @@ none:无阴影
 `inset`：阴影类型为内阴影，（当无此值时，默认为外阴影）
 说明：
 可以设置多组效果，每组以逗号分隔，应用顺序与上面相同
+## 总结
+本篇主要针对CSS的border属性进行详解，其实我写这篇博客的主要目的是为后面的用border属性写各种对话气泡和各种图形做铺垫，感兴趣的话可以多多关注哦！
 
 
 
