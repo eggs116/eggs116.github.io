@@ -1049,6 +1049,46 @@ description: 本篇介绍了用纯CSS属性实现各种形状的方法
 ```
 ![border钻石](../img/CSS_border_graph/Css_border-diamond.png)
 很简单，跟多边形的原理一样，就是由一个梯形和一个三角形组成
+## 无穷大
+```html
+.infinity {
+    width: 212px;
+    height: 100px;
+    position: relative;
+}
+.infinity:before,
+.infinity:after {
+    content: "";
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 20px solid yellowgreen;
+    -moz-border-radius: 50% 50% 0 50%;
+    border-radius: 50% 50% 0 50%;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+.infinity:after {
+    left: auto;
+    right: 0;
+    border: 20px solid yellowgreen;
+    -moz-border-radius: 50% 50% 50% 0;
+    border-radius: 50% 50% 50% 0;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+```
+![border无穷大](../img/CSS_border_graph/Css_border-infinity.png)
+由两个分别右下角和左下角圆角弧度为0，其它角弧度均为50%的矩形旋转一定的角度组成而得，或许区别一下`.infinity:before`和`.infinity:after`的边框颜色，会看的更明显
+![border无穷大](../img/CSS_border_graph/Css_border-infinity2.png)
 ## 八卦
 ```html
 .gossip {
