@@ -1,12 +1,10 @@
 ---
 title: CSS画对话框
 date: 2018-11-02 11:10:41
-tags:
-    -css
+tags: CSS
 urlname: CSS_dialogue_box
 categories: CSS
-keyword:
-    -CSS
+keyword: CSS
 description: 本篇主要介绍利用纯CSS写对话框、对话气泡的多种方法
 ---
 在实际工作中，有时候为了项目中页面的美观性，会需要把文字放到类似对话框的元素中，上一篇博客介绍了用CSS画各种图形，那这一篇我们就来了解一下怎样用CSS来画对话框或对话气泡吧
@@ -159,9 +157,56 @@ description: 本篇主要介绍利用纯CSS写对话框、对话气泡的多种�
 }
 ```
 ![border小尾巴](../img/CSS_dialogue_box/Css_dialogue_box_oval-tail.png)
-其实就是上面那个例子，把矩形变成椭圆即可，是不是很简单
-
+其实就是上面那个例子，把矩形变成椭圆即可，是不是很简单，当然，你也可以调整小尾巴的弧度、位置和椭圆的弧度，形成各种图形，在此就不多做描述了
 ## 三角形+对话框
+### 字符法
+```html
+<style>
+.roundrect-bot {
+    width: 180px;
+    background: #abe1eb;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    position: relative;
+    padding: 10px;
+    text-align: center;
+}
+.bot{
+    position: absolute;
+    bottom: -45px;
+    left: 15px;
+    font-size: 70px;
+    color: #abe1eb;
+}
+</style>
+
+<div class="roundrect-bot">请叫我小仙女请叫我小仙女
+    <span class="bot">◆</span>
+</div>
+```
+![border字符法](../img/CSS_dialogue_box/Css_dialogue_box_roundrect-bot.png)
+这是用两个元素来实现的，从上面代码中，我们可以发现，其实用一个元素也可以实现，`.bot`元素完全可以用`.roundrect-bot::after`来替代，效果跟上面是一样的
+```html
+.roundrect-bot {
+    width: 180px;
+    background: #abe1eb;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    position: relative;
+    padding: 10px;
+    text-align: center;
+}
+.roundrect-bot::after{
+    content: '◆';
+    position: absolute;
+    bottom: -45px;
+    left: 15px;
+    font-size: 70px;
+    color: #abe1eb;
+}
+```
 ### 等腰直角三角形
 ```html
 .roundrect-triangle1{
@@ -359,3 +404,40 @@ description: 本篇主要介绍利用纯CSS写对话框、对话气泡的多种�
 ```
 ![border无背景色对话框](../img/CSS_dialogue_box/Css_dialogue_box_roundrect-triangle4.png)
 注：这里所说的无背景，其实是指背景和边框颜色不一样，本例中，背景为白色，`.roundrect-triangle4::before`为元素边框色的三角形`.roundrect-triangle4::after`为元素背景色的三角形，用第二个遮住第一个大部分，只留下下面那个三角轮廓，就实现了上图中的效果了
+## 气泡对话框
+```html
+.roundrect-bubble {
+    max-width: 200px;
+    width: fit-content;
+    background: #abe1eb;
+    border: 2px solid #abe1eb;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 50%;
+    position: relative;
+    padding: 25px;
+    text-align: center;
+    margin: 100px;
+}
+.roundrect-bubble::before {
+    content: '';
+    width: 25px;
+    height: 25px;
+    background: #abe1eb;
+    position: absolute;
+    left: 0;
+    bottom: -20px;
+    border-radius: 50%;
+}
+.roundrect-bubble::after {
+    content: '';
+    width: 15px;
+    height: 15px;
+    background: #abe1eb;
+    position: absolute;
+    left: -15px;
+    bottom: -40px;
+    border-radius: 50%;
+}
+```
+![border气泡对话框](../img/CSS_dialogue_box/Css_dialogue_box_roundrect-bubble.png)
