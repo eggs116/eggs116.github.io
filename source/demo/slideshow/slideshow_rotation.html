@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>旋转木马</title>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul,
+        ol {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .wrap {
+            width: 600px;
+            margin: 200px auto;
+            position: relative;
+        }
+
+        .slide {
+            height: 260px;
+            position: relative;
+        }
+
+        ul li {
+            position: absolute;
+            left: 100px;
+        }
+
+        img {
+            width: 100%;
+            vertical-align: middle;
+        }
+
+        .arr {
+            width: 600px;
+            height: 50px;
+            position: absolute;
+            top: 50%;
+            margin-top: -25px;
+            opacity: 1;
+            z-index: 10;
+        }
+
+        .arr span {
+            width: 50px;
+            line-height: 50px;
+            text-align: center;
+            font-family: "黑体";
+            font-size: 30px;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #ccc;
+            position: absolute;
+            cursor: pointer;
+        }
+
+        .arr .pre {
+            left: 0px;
+        }
+
+        .arr .next {
+            right: 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap" id="wrap">
+        <div class="slide" id="slide">
+            <ul id="ul">
+                <li><img src="img/1.jpg" alt=""></li>
+                <li><img src="img/2.jpg" alt=""></li>
+                <li><img src="img/3.jpg" alt=""></li>
+                <li><img src="img/4.jpg" alt=""></li>
+                <li><img src="img/5.jpg" alt=""></li>
+                <li><img src="img/6.jpg" alt=""></li>
+                <li><img src="img/7.jpg" alt=""></li>
+            </ul>
+            <div class="arr" id="arr">
+                <span class="pre" id="pre"><</span>
+                        <span class="next" id="next">></span>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script src="js/moveAnimation.js"></script>
+<script>
+    var wrap = document.getElementById('wrap');
+    var ul=document.getElementById('ul');
+    var lis=ul.children;
+    var lis_len=lis.length;
+    var arr=document.getElementById('arr');
+    var json_arr=[//每条数据（每条数据都代表一个位置）都控制着一张图片的对应样式，由上至下，依次是第1~7张图片，切换时图片由上至下依然是第1~7张图片，而数组中的数据位置改变，从而实现图片切换效果
+        {width:200,top:-70,left:60,opacity:40,z:1},//注此处opacity为0~100间的值，而非0~1
+        {width:250,top:-50,left:30,opacity:60,z:2},
+        {width:300,top:-30,left:0,opacity:80,z:3},
+        {width:400,top:0,left:100,opacity:100,z:4},
+        {width:300,top:-30,left:300,opacity:80,z:3},
+        {width:250,top:-50,left:320,opacity:60,z:2},
+        {width:200,top:-70,left:340,opacity:40,z:1}
+    ]
+    var click_btn=true;//节流，防止不间断点击按钮，当click_btn为true时才可以执行点击事件
+    togglePic();//执行一次togglePic函数--按最初状态布局图片
+    //自动执行动画即每间隔一定时间执行一次nextAnimate函数
+    var timer=null;
+    timer=setInterval(nextAnimate,2000);
+    //通过event事件，判断触发事件的元素的id来确定点击的是next还是pre来执行对应事件
+    arr.addEventListener('click',function(e){
+        var e=e||window.e;
+        var target=e.target||e.srcElement;
+        if(target.id==='next'&&click_btn){     
+            click_btn=false;   //动画未执行完之前，click_btn赋值为false禁止下次点击事件执行    
+            nextAnimate();
+        }else if(target.id==='pre'&&click_btn){
+            click_btn=false;
+            preAnimate();
+        }
+    });
+    //鼠标经过arr出现，自动执行动画暂停，
+    wrap.addEventListener('mouseover',function(){
+        arr.style.opacity=1;
+        clearInterval(timer);
+    })
+    //鼠标移除继续从当前图片执行动画
+    wrap.addEventListener('mouseout',function(){
+        arr.style.opacity=0;
+        timer=setInterval(nextAnimate,2000);
+    })    
+    //nextAnimate函数
+    function nextAnimate(){
+        //数组中第1个json对象永远都对应第一张图片，一次类推，通过调整数组中json对象的顺序来控制图片位置（注每个json对象都对应一个固定的位置）
+        json_arr.unshift(json_arr.pop());//pop()删除数组的最后一个元素并返回此元素，unshift()在数组首尾插入元素
+        togglePic();     
+    }
+    //preAnimate 函数
+    function preAnimate(){
+        json_arr.push(json_arr.shift());//shift()删除数组的第一个元素并返回此元素，push()在数组尾部插入元素
+        togglePic();
+    }
+    function togglePic(){
+        for(var i=0;i<lis_len;i++){//遍历，给每张图片都赋值它当前对应的对象的值
+            moveAnimation(lis[i],{width:json_arr[i].width,
+                top:json_arr[i].top,
+                left:json_arr[i].left,
+                opacity:json_arr[i].opacity,
+                zIndex:json_arr[i].z},function(){click_btn=true;})//函数执行完毕后click_btn赋值为true，方可执行下次点击事件
+        }
+    }
+</script>

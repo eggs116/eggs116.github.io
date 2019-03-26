@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>无缝切换_无arr_circle</title>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul,
+        ol {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .wrap {
+            width: 400px;
+            height: 260px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            margin: 100px auto;
+            position: relative;
+        }
+
+        .slide {
+            width: 400px;
+            height: 260px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        ul {
+            width: 3200px;
+            position: absolute;
+            left: 0;
+        }
+
+        ul li {
+            float: left;
+        }
+
+        img {
+            width: 400px;
+            height: 260px;
+            vertical-align: middle;
+        }
+
+        .arr {
+            width: 400px;
+            height: 50px;
+            position: absolute;
+            top: 50%;
+            margin-top: -25px;
+            display: none;
+        }
+
+        .arr span {
+            width: 50px;
+            line-height: 50px;
+            text-align: center;
+            font-family: "黑体";
+            font-size: 30px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #ccc;
+            position: absolute;
+            cursor: pointer;
+        }
+
+        .arr .pre {
+            left: 0px;
+        }
+
+        .arr .next {
+            right: 0px;
+        }
+
+        ol {
+            width: 200px;
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            margin-left: -100px;
+        }
+
+        ol li {
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            text-align: center;
+            float: left;
+            margin-right: 10px;
+            background-color: #fff;
+            color: #000;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        ol li:last-child {
+            margin-right: 0;
+        }
+
+        ol li.cur {
+            background-color: yellowgreen;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap" id="wrap">
+        <div class="slide" id="slide">
+            <ul id="ul">
+                <li><img src="img/1.jpg" alt=""></li>
+                <li><img src="img/2.jpg" alt=""></li>
+                <li><img src="img/3.jpg" alt=""></li>
+                <li><img src="img/4.jpg" alt=""></li>
+                <li><img src="img/5.jpg" alt=""></li>
+                <li><img src="img/6.jpg" alt=""></li>
+                <li><img src="img/7.jpg" alt=""></li>
+            </ul>
+            <div class="arr" id="arr">
+                <span class="pre" id="pre"><</span>
+                        <span class="next" id="next">></span>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script src="js/moveAnimation.js"></script>
+<script>
+    var wrap = document.getElementById('wrap');
+    var slide = document.getElementById('slide');
+    var ul = document.getElementById('ul');
+    var lis = ul.children;
+    var lis_len = lis.length;//7
+    var lefter = lis[0].offsetWidth;
+    var arr = document.getElementById('arr');
+    var ol = document.createElement('ol');//创建ol
+    for (var i = 0; i < lis_len; i++) {
+        var li = document.createElement('li');
+        li.innerHTML = i + 1;
+        ol.append(li);//把li追加到ol中
+    }
+    slide.append(ol);//把ol追加到页面中
+    var ollis = ol.children;
+    ollis[0].className = "cur";
+    ul.append(lis[0].cloneNode(true)); // 复制第一张图片插入到最后,此时lis.length为8,而lis_len仍为7
+    var cir_num = 0;//控制当前circle序号
+    var key = 0;//控制显示的图片序号
+    //自动执行动画nextAnimate
+    var timer = null;
+    timer = setInterval(nextAnimate, 2000);//注：不能用ul.timer会跟animate里的定时器冲突
+    //分别点击next/pre执行函数
+    arr.addEventListener('click',function(e){
+        var e=e||window.e;
+        var target=e.target||e.srcElement;
+        var targetId=target.id;
+        if(targetId==='next'){
+            nextAnimate();
+        }else{
+            preAnimate();
+        }
+    });
+    //鼠标经过ollis切换到当前序号的图片显示
+    for (var i = 0; i < lis_len; i++) {
+        ollis[i].index = i;//获取当前遍历到的序号
+        //鼠标移动到circle上切换图片
+        ollis[i].addEventListener('mouseover', function () {
+            cir_num = key = this.index;//从当前图片开始播放切换
+            moveAnimation(ul, { left: -key * lefter });//鼠标经过，滚动到当前图片
+            toggleCur();
+        })
+    }
+    //鼠标经过停止动画
+    wrap.addEventListener('mouseover', function () {
+        arr.style.display = 'block';
+        clearInterval(timer);
+    });
+    //鼠标移出开启动画
+    wrap.addEventListener('mouseout', function () {
+        arr.style.display = 'none';
+        timer = setInterval(nextAnimate, 2000);
+    })
+    //next动画函数/自动执行动画函数，自动执行即每隔规定时间触发一次next动画函数
+    function nextAnimate() {
+        key++;
+        if (key > lis_len) {//lis.length值为8，当key值为8时，当前显示的是第1张图，要显示第2张图
+            ul.style.left = 0;
+            key = 1;//如果key值为0会导致1张图重复播放
+        }
+        moveAnimation(ul, { left: -key * lefter });
+        cir_num++;
+        cir_num>lis_len-1?cir_num=0:cir_num;//当播放到第8张图片（也就是第1张图片）时，第1个数字为当前标识        
+        toggleCur();
+    }
+    //pre动画
+    function preAnimate() {
+        key--;
+        if (key < 0) {
+            ul.style.left = -lis_len * lefter + "px";
+            key = lis_len-1;
+        }
+        moveAnimation(ul, { left: -key * lefter });       
+        cir_num--;
+        cir_num<0?cir_num=lis_len-1:cir_num;
+        toggleCur();
+    }
+    //切换olli的类cur
+    function toggleCur() {
+        for (var i = 0; i < lis_len; i++) {
+            ollis[i].className = "";
+        }
+        ollis[cir_num].className = "cur";
+    }
+</script>

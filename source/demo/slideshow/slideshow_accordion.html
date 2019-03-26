@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>手风琴轮播</title>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul,
+        ol {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .wrap {
+            width: 1200px;
+            height: 260px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            margin: 100px auto;
+            position: relative;
+        }
+
+        .slide {
+            width: 1200px;
+            height: 260px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        ul {
+            width: 1200px;
+            position: absolute;
+            left: 0;
+        }
+
+        ul li {
+            float: left;
+            width: 133px;
+            height: 260px;
+            background-position:center;
+        }
+        ul li:first-child{
+            width: 400px;
+            margin: 0 1px 0 0;
+        }
+
+        img {
+            width: 400px;
+            height: 260px;
+            vertical-align: middle;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="wrap" id="wrap">
+        <div class="slide" id="slide"></div>
+    </div>
+</body>
+
+</html>
+<script src="js/moveAnimation.js"></script>
+<script>
+    var slide = document.getElementById('slide');
+    var ul=document.createElement('ul');
+    for(var i=0;i<7;i++){//在ul中插入li并设置背景图
+        var li=document.createElement('li');
+        li.style.backgroundImage='url(img/'+(i+1)+'.jpg)';
+        ul.append(li);
+    }
+    slide.append(ul);//将ul插入页面
+    var lis=ul.children;
+    var lis_len=lis.length;
+    //遍历li,所有li都有鼠标经过事件
+    for(var i=0;i<lis_len;i++){
+        lis[i].index=i;//获得序号
+        lis[i].addEventListener('mouseover',function(){
+            var that=this.index;
+            for(var j=0;j<lis_len;j++){//遍历，所有li外边界为0,宽度为收缩状
+                lis[j].style.margin=0;
+                moveAnimation(lis[j],{width:133});
+            }
+            // 判断，若是第一张图右侧有外边距，最后一张左侧有边距，否则两边都有边距
+            if(that===0){
+                this.style.margin="0 1px 0 0";
+            }else if(that===lis_len-1){
+                this.style.margin="0 0 0 1px";
+            }else{
+                this.style.margin="0 1px";
+            }
+            this.style.margin="0 px";
+            moveAnimation(this,{width:400});
+        });
+    }
+
+</script>

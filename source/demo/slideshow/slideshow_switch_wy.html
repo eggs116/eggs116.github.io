@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>无缝切换_arr_circle</title>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul,
+        ol {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .wrap {
+            width: 400px;
+            height: 260px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            margin: 100px auto;
+            position: relative;
+        }
+
+        .slide {
+            width: 400px;
+            height: 260px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        ul {
+            width: 400px;
+        }
+
+        ul li {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        img {
+            width: 400px;
+            height: 260px;
+            vertical-align: middle;
+        }
+
+        .arr {
+            width: 400px;
+            height: 50px;
+            position: absolute;
+            top: 50%;
+            margin-top: -25px;
+            display: none;
+        }
+
+        .arr span {
+            width: 50px;
+            line-height: 50px;
+            text-align: center;
+            font-family: "黑体";
+            font-size: 30px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #ccc;
+            position: absolute;
+            cursor: pointer;
+        }
+
+        .arr .pre {
+            left: 0px;
+        }
+
+        .arr .next {
+            right: 0px;
+        }
+
+        ol {
+            width: 200px;
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            margin-left: -100px;
+        }
+
+        ol li {
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            text-align: center;
+            float: left;
+            margin-right: 10px;
+            background-color: #fff;
+            color: #000;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        ol li:last-child {
+            margin-right: 0;
+        }
+
+        ol li.cur {
+            background-color: yellowgreen;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap" id="wrap">
+        <div class="slide" id="slide">
+            <ul id="ul">
+                <li><img src="img/1.jpg" alt=""></li>
+                <li><img src="img/2.jpg" alt=""></li>
+                <li><img src="img/3.jpg" alt=""></li>
+                <li><img src="img/4.jpg" alt=""></li>
+                <li><img src="img/5.jpg" alt=""></li>
+                <li><img src="img/6.jpg" alt=""></li>
+                <li><img src="img/7.jpg" alt=""></li>
+            </ul>
+            <div class="arr" id="arr">
+                <span class="pre" id="pre"><</span>
+                        <span class="next" id="next">></span>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script src="js/moveAnimation.js"></script>
+<script>
+    var wrap = document.getElementById('wrap');
+    var slide = document.getElementById('slide');
+    var ul = document.getElementById('ul');
+    var lis = ul.children;
+    var lis_len=lis.length;//7
+    var lefter=lis[0].offsetWidth;
+    var arr = document.getElementById('arr');
+    var ol = document.createElement('ol');//创建ol
+    for (var i = 0; i < lis_len; i++) {
+        var li = document.createElement('li');
+        li.innerHTML = i + 1;
+        ol.append(li);//把li追加到ol中
+    }
+    slide.append(ol);//把ol追加到页面中
+    var ollis = ol.children;
+    ollis[0].className = "cur";
+    //当前显示第1张图片，其它图片都叠放在右侧
+    for (var i = 0; i < lis_len; i++) {
+        lis[i].style.left = lefter + "px";
+    }
+    lis[0].style.left = 0;
+    var key = 0;
+    //自动播放执行
+    var timer = null;
+    timer = setInterval(nextAnimate, 2000);
+    //分别点击next/pre执行函数
+    arr.addEventListener('click',function(e){
+        var e=e||window.e;
+        var target=e.target||e.srcElement;
+        var targetId=target.id;
+        if(targetId==='next'){
+            nextAnimate();
+        }else{
+            preAnimate();
+        }
+    });
+    //鼠标经过ollis切换到当前序号的图片显示
+    for (var i = 0; i < lis_len; i++) {
+        ollis[i].index = i;
+        ollis[i].addEventListener('mouseover', function () {
+            that = this.index;
+            if (that > key) {
+                moveAnimation(lis[key], { left: -lefter });
+                lis[that].style.left = lefter + "px";
+            } else {
+                moveAnimation(lis[key], { left: lefter });
+                lis[that].style.left = -lefter + "px";
+            }
+            key = that;
+            moveAnimation(lis[key], { left: 0 });
+            toggleCur();
+        })
+    }
+    //鼠标经过停止计时器，arr显示
+    wrap.addEventListener('mouseover', function () {
+        clearInterval(timer);
+        arr.style.display = "block";
+    })
+    //鼠标移出开启定时器，arr隐藏
+    wrap.addEventListener('mouseout', function () {
+        timer = setInterval(nextAnimate, 2000);
+        arr.style.display = "none";
+    })
+    //点击下一张next函数/自动播放函数
+    function nextAnimate() {
+        moveAnimation(lis[key], { left: -lefter });//先将当前图片向左滑动
+        key++;//key值切换为要显示的图片的序号
+        key > lis_len - 1 ? key = 0 : key;//首尾判断
+        lis[key].style.left = lefter + "px";//要显示的图片迅速切换到指定位置
+        moveAnimation(lis[key], { left: 0 });//要显示的图片从指定位置滑到显示位
+        toggleCur();//切换ollis的cur
+    }
+    //切换上一张pre函数
+    function preAnimate() {
+        moveAnimation(lis[key], { left: lefter });
+        key--;
+        key < 0 ? key = lis_len-1 : key;
+        lis[key].style.left = -lefter + "px";
+        moveAnimation(lis[key], { left: 0 });
+        toggleCur();
+    }
+    //切换olli的类cur
+    function toggleCur() {
+        for (var i = 0; i < lis_len; i++) {
+            ollis[i].className = "";
+        }
+        ollis[key].className = "cur";
+    }
+
+</script>

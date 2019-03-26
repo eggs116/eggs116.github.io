@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>无缝切换_arr_无circle</title>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul,
+        ol {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .wrap {
+            width: 400px;
+            height: 260px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            margin: 100px auto;
+            position: relative;
+        }
+
+        .slide {
+            width: 400px;
+            height: 260px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        ul {
+            width: 3200px;
+            position: absolute;
+            left: 0;
+        }
+
+        ul li {
+            float: left;
+        }
+
+        img {
+            width: 400px;
+            height: 260px;
+            vertical-align: middle;
+        }
+
+        .arr {
+            width: 400px;
+            height: 50px;
+            position: absolute;
+            top: 50%;
+            margin-top: -25px;
+            display: none;
+        }
+
+        .arr span {
+            width: 50px;
+            line-height: 50px;
+            text-align: center;
+            font-family: "黑体";
+            font-size: 30px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #ccc;
+            position: absolute;
+            cursor: pointer;
+        }
+
+        .arr .pre {
+            left: 0px;
+        }
+
+        .arr .next {
+            right: 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap" id="wrap">
+        <div class="slide" id="slide">
+            <ul id="ul">
+                <li><img src="img/1.jpg" alt=""></li>
+                <li><img src="img/2.jpg" alt=""></li>
+                <li><img src="img/3.jpg" alt=""></li>
+                <li><img src="img/4.jpg" alt=""></li>
+                <li><img src="img/5.jpg" alt=""></li>
+                <li><img src="img/6.jpg" alt=""></li>
+                <li><img src="img/7.jpg" alt=""></li>
+            </ul>
+            <div class="arr" id="arr">
+                <span class="pre" id="pre"><</span>
+                        <span class="next" id="next">></span>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script src="js/moveAnimation.js"></script>
+<script>
+    window.onload = function () {
+        var wrap = document.getElementById('wrap');
+        var ul = document.getElementById('ul');
+        var lis = ul.children;
+        var lis_len = lis.length;  // 7
+        var lefter = lis[0].offsetWidth;
+        var arr = document.getElementById('arr');
+        var next = document.getElementById('next');
+        var pre = document.getElementById('pre');
+        var key = 0;
+        var timer = null;
+        ul.append(lis[0].cloneNode(true)); //复制第1张图片并追加到最后,此时lis.length为8,而lis_len仍为7
+        //自动执行动画nextAnimate
+        timer = setInterval(nextAnimate, 2000);//每隔3s执行一次点击next动画
+        //分别点击next/pre执行函数
+        arr.addEventListener('click', function (e) {
+            var e = e || window.e;
+            var target = e.target || e.srcElement;
+            var targetId = target.id;
+            if (targetId === 'next') {
+                nextAnimate();
+            } else {
+                preAnimate();
+            }
+        });
+        //鼠标经过停止动画
+        wrap.addEventListener('mouseover', function () {
+            arr.style.display = "block";
+            clearInterval(timer);
+        })
+        //鼠标移出开启动画
+        wrap.addEventListener('mouseout', function () {
+            arr.style.display = "none";
+            timer = setInterval(nextAnimate, 2000);
+        })
+        //点击next按钮动画
+        function nextAnimate() {
+            key++;
+            if (key > lis_len) {//lis.length为8,当key为7时，要显示第8张（也就是第1张图），当key为8时要显示第2张图，第2张图的当前key值为1
+                ul.style.left = 0;//让当前显示的是第1张图
+                key = 1;//要显示第2张图
+            }
+            moveAnimation(ul, { left: -key * lefter });//执行动画，滑动到要显示的图片
+        }
+        //点击pre按钮动画
+        function preAnimate() {
+            key--;
+            if (key < 0) {//key为0时，要显示第1张图（也就是倒数第1张图），当key为-1时要显示倒数第2张图，也就是第7张图，第7张图的当前key值为6
+                ul.style.left = -lis_len * lefter + "px";//让当前显示的是倒数第1张图
+                key = lis_len-1;//要显示倒数第2张，也就是第7张图
+            }
+            moveAnimation(ul, { left: -key * lefter });//执行动画，滑动到要显示的图片
+        }
+    }
+
+</script>
