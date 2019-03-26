@@ -2,30 +2,79 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://yyeggs.com/slideshow_marquee/</loc>
+    <loc>http://yyeggs.com/demo/slideshow/slideshow_marquee.html</loc>
     
-    <lastmod>2019-03-26T03:23:31.000Z</lastmod>
+    <lastmod>2019-03-26T11:05:47.278Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yyeggs.com/demo/slideshow/slideshow_accordion.html</loc>
+    
+    <lastmod>2019-03-26T11:05:20.799Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yyeggs.com/demo/slideshow/slideshow_rotation.html</loc>
+    
+    <lastmod>2019-03-26T11:05:11.037Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yyeggs.com/demo/slideshow/slideshow_switch_arr_circle.html</loc>
+    
+    <lastmod>2019-03-26T11:04:14.252Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yyeggs.com/demo/slideshow/slideshow_switch_circle.html</loc>
+    
+    <lastmod>2019-03-26T11:03:57.741Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yyeggs.com/demo/slideshow/slideshow_switch_arr.html</loc>
+    
+    <lastmod>2019-03-26T11:03:35.083Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yyeggs.com/demo/slideshow/slideshow_switch_wy.html</loc>
+    
+    <lastmod>2019-03-26T11:02:58.390Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://yyeggs.com/slideshow_accordion/</loc>
     
-    <lastmod>2019-03-26T03:21:17.742Z</lastmod>
+    <lastmod>2019-03-26T10:56:05.672Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://yyeggs.com/slideshow_rotation/</loc>
     
-    <lastmod>2019-03-26T03:20:52.123Z</lastmod>
+    <lastmod>2019-03-26T10:55:31.130Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://yyeggs.com/slideshow_switch/</loc>
     
-    <lastmod>2019-03-26T03:20:36.996Z</lastmod>
+    <lastmod>2019-03-26T10:55:02.316Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yyeggs.com/slideshow_marquee/</loc>
+    
+    <lastmod>2019-03-26T10:50:31.623Z</lastmod>
     
   </url>
   
